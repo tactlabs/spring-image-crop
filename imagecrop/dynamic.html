@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+  	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+  	<script type="text/javascript" src="scripts/jquery.imgareaselect.pack.js"></script>
+</head>
+
+<body>
+
+	<div style="border:1px solid green; width: 400px; height:400px; float: left; margin-right: 10px;">
+		<img src="http://localhost:1878/images/ant.jpg" id="ladybug_ant" />
+	</div>
+	
+	<div id="test" style="border:1px solid green; width: 400px; height:400px; float: left;">
+	</div>
+	
+	<div style="clear:both">
+	</div>
+	
+	<div style="clear:both">
+		<br>
+		<input type="button" value="crop" id="crop_button" />
+	</div>
+
+
+<script>
+
+	$(document).ready(function () {
+		//$('#ladybug_ant').imgAreaSelect({ x1: 120, y1: 90, x2: 280, y2: 210 });
+		
+		//console.log('test');
+		
+		//showImage();
+		
+		var x1 = 0;
+		var y1 = 0;
+		var x2 = 0;
+		var y2 = 0;
+		
+		$('img#ladybug_ant').imgAreaSelect({
+	        handles: true,
+	        
+	        onSelectEnd: function (img, selection) {
+	            
+	        	/*
+	        	$('input[name="x1"]').val(selection.x1);
+	            $('input[name="y1"]').val(selection.y1);
+	            $('input[name="x2"]').val(selection.x2);
+	            $('input[name="y2"]').val(selection.y2); 
+	            */
+	            
+	            /*
+	        	console.log('selection.x1 : '+selection.x1);
+	        	console.log('selection.y1 : '+selection.y1);
+	        	console.log('selection.x2 : '+selection.x2);
+	        	console.log('selection.y2 : '+selection.y2);
+	        	*/
+	        	
+	        	x1 = selection.x1;
+	        	y1 = selection.y1;
+	        	x2 = selection.x2;
+	        	y2 = selection.y2;
+	        	
+	        	$("#test").html('');
+	        	
+	        	//cropImage(selection.x1, selection.y1, selection.x2, selection.y2);
+	        }
+	    });
+		
+		function callme(){
+			//console.log('test1');
+		}
+		
+		$('#crop_button').click(function(){
+			//console.log('button clicked');
+			
+			cropImage(x1, y1, x2, y2);
+		});
+		
+		function showImage(){
+			$.ajax({				
+				url: "http://localhost:1878/images/ant.jpg",
+				cache: false,
+				success: function(result){
+					//$("#results").append(result);
+					//console.log(result);
+					
+					var content = '<img src="'+result+'" />';
+					
+					$("#test").html(content);
+					
+					//$("#ladybug_ant").attr("src", result);
+				}
+			});
+		}
+		
+		function cropImage(x1, y1, x2, y2){
+			
+			var data = {
+				x1 : x1,
+				y1 : y1, 
+				x2 : x2, 
+				y2 : y2
+			}
+			
+			//console.log(data);
+			
+			$.ajax({
+				type : 'POST',
+				url: "http://localhost:1878/base/crop/image",
+				cache: false,
+				data : data,
+				dataType: "json",
+				success: function(result){
+					
+					//console.log(result);
+					
+					
+					var content = '<img src="'+result.result+'"  />';
+					$("#test").html(content);
+					
+					//$("#ladybug_ant").attr("src", result.result);
+				},
+	            error: function (xhr, status, errorThrown) {
+	                //alert(status);
+	            	alert(xhr.status);
+	            }
+			});
+		}
+	});
+	
+	
+</script>
+
+</body>
+</html>

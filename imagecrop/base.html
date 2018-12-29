@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+  	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+  	<script type="text/javascript" src="scripts/jquery.imgareaselect.pack.js"></script>
+</head>
+
+<body>
+
+<img src="ant.jpg" id="ladybug_ant" />
+
+
+<script>
+	$(document).ready(function () {
+		//$('#ladybug_ant').imgAreaSelect({ x1: 120, y1: 90, x2: 280, y2: 210 });
+		
+		//console.log('test');
+		
+		$('img#ladybug_ant').imgAreaSelect({
+	        handles: true,
+	        
+	        onSelectEnd: function (img, selection) {
+	            
+	        	/*
+	        	$('input[name="x1"]').val(selection.x1);
+	            $('input[name="y1"]').val(selection.y1);
+	            $('input[name="x2"]').val(selection.x2);
+	            $('input[name="y2"]').val(selection.y2); 
+	            */
+	            
+	        	console.log('selection.x1 : '+selection.x1);
+	        	console.log('selection.y1 : '+selection.y1);
+	        	console.log('selection.x2 : '+selection.x2);
+	        	console.log('selection.y2 : '+selection.y2);
+	        }
+	    });
+		
+		function callme(){
+			console.log('test1');
+		}
+	});
+	
+	
+</script>
+
+</body>
+</html>
