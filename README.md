@@ -1,3 +1,5 @@
+[![HitCount](http://hits.dwyl.io/teamtact/https://github.com/teamtact/spring-image-crop.svg)](http://hits.dwyl.io/teamtact/https://github.com/teamtact/spring-image-crop)
+
 # spring-base-rest
 Spring Boot REST Boilerplate Project
 
